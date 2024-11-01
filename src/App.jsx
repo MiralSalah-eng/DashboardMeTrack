@@ -8,7 +8,7 @@ import Messages from "./pages/Messages"
 import Profile from "./pages/Profile"
 import Events from "./pages/Events"
 import Login from "./pages/Login"
-import Settings from "./pages/settings"
+import AccountSettings from "./pages/AccountSettings"
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path="/messages" element = {<Messages/>}/> 
         <Route path="/profile" element = {<Profile/>}/> 
         <Route path="/events" element = {<Events/>}/> 
-        <Route path="/account-settings" element = {<Settings/>}/> 
+        <Route path="/account-settings" element = {<AccountSettings/>}/> 
         </Route>
       </Routes>
     

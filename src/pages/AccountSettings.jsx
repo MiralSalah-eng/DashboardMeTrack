@@ -17,7 +17,7 @@ import framer from '../assets/framer.png';
 import goodbye from '../assets/goodbye.png';
 import { BsInstagram, BsLinkedin, BsTwitter } from 'react-icons/bs';
 
-const Settings = () => {
+const AccountSettings = () => {
   // State to manage active tab
   const [active, setActive] = useState('Basic Info');
 
@@ -289,4 +289,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default AccountSettings;
