@@ -5,10 +5,10 @@ const Popup = ({data, title}) => {
   
   return (
     <>
-   <div className='absolute flex flex-col space-y-2 min-w-[300px] h-fit 
-   z-10 top-[25px] right-2 py-2 px-2  text-slate-700 bg-white 
+   <div className='absolute flex flex-col space-y-2 w-56 md:min-w-[300px] h-fit 
+   z-10 top-[25px] md:right-2 py-4 md:py-2 px-2  text-slate-700 bg-white 
    shadow-lg rounded-lg'>
-        <h4 className='font-bold  text-base'>{title}</h4>
+        <h4 className='font-bold text-sm  md:text-base'>{title}</h4>
         
        {data.map((item,index)=>(
        <>
@@ -17,7 +17,7 @@ const Popup = ({data, title}) => {
 )}
        <div className='flex flex-col space-y-1 w-full '>
             <h6 className='text-sm font-semibold  text-slate-700 leading-[1.1rem]'>{item.title} 
-                {item.subject}
+                {item.subject} 
             </h6>
             <p className='font-normal text-slate-600 text-xs'>{item.message}</p>
           {
