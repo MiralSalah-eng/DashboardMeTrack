@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { HiOutlineBell, HiOutlineChevronDown, HiOutlineCog, HiOutlineMail, HiOutlineMenu, HiSearch } from 'react-icons/hi'
 import profilePic from '../assets/profileimg.jpg'
 import IconCard from './IconCard'
@@ -10,6 +10,10 @@ const Header = ({openSidebar , setOpenSidebar}) => {
 
   const [showNotification,setShowNotification] = useState(false)
   const [showInbox,setShowInbox] = useState(false)
+
+   // References for notifications and inbox
+   const notificationRef = useRef(null);
+   const inboxRef = useRef(null);
 
   const handlemenu = () => {
     setOpenSidebar (!openSidebar)
@@ -26,6 +30,26 @@ const Header = ({openSidebar , setOpenSidebar}) => {
   }
   
 
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        notificationRef.current && !notificationRef.current.contains(event.target) &&
+        inboxRef.current && !inboxRef.current.contains(event.target)
+      ) {
+        setShowNotification(false);
+        setShowInbox(false);
+      }
+    };
+
+    // Add event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Cleanup event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
 
   return (
@@ -56,25 +80,30 @@ const Header = ({openSidebar , setOpenSidebar}) => {
         <div className='flex ml-8 md:ml-0 items-center space-x-2'>
           <IconCard   Icon={HiSearch} count = {false} />
 
-          {/* Inbox */}
-          <IconCard 
-          data={inboxData} 
-          handleClick={handleInboxClick}
-          showInbox={showInbox}
-          Icon={HiOutlineMail}
-          num = {inboxData.length}
-          title='Inbox'
-          />
-         
+                {/* Inbox */}
+                <div ref={inboxRef}>
+            <IconCard
+              data={inboxData}
+              handleClick={handleInboxClick}
+              showInbox={showInbox}
+              Icon={HiOutlineMail}
+              num={inboxData.length}
+              title='Inbox'
+            />
+          </div>
+
           {/* Notification */}
-          <IconCard 
-          data={notificationsData} 
-          handleClick={handleNotificationClick} 
-          showNotification={showNotification}  
-          Icon={HiOutlineBell} 
-          num = {notificationsData.length} 
-          title='Notifications'
-          />
+          <div ref={notificationRef}>
+            <IconCard
+              data={notificationsData}
+              handleClick={handleNotificationClick}
+              showNotification={showNotification}
+              Icon={HiOutlineBell}
+              num={notificationsData.length}
+              title='Notifications'
+            />
+          </div>
+         
           </div>
 
       {/* Avatar */}
